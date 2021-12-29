@@ -70,7 +70,7 @@ plt.show()
 
 # Connect the Excel workbook
 
-book = xw.Book('/Users/randycastleman/Dropbox/Code/Monte_Carlo/portfolio_monte_carlo.xlsx')
+book = xw.Book('portfolio_monte_carlo.xlsx')
 model = book.sheets("Model")
 results = book.sheets("Results")
 
@@ -100,9 +100,8 @@ def dcf_simulation(fund_size,
     
     book.sheets('Results').clear()
 
-    model.range("C2").value = fund_size
-
-    model.range("C3").value = num_companies
+#     model.range("C2").value = fund_size
+#     model.range("C3").value = num_companies
 
     avg_initial_investment = fund_size / num_companies
 
@@ -200,22 +199,22 @@ def dcf_simulation(fund_size,
                                                         hold_period_upper_bound*days))
     model.range("F16").value = company1_exit_date
 
-    company2_exit_date = company1_inv_date + timedelta(days = np.random.triangular(hold_period_lower_bound*days,
+    company2_exit_date = company2_inv_date + timedelta(days = np.random.triangular(hold_period_lower_bound*days,
                                                         hold_period_mode*days,
                                                         hold_period_upper_bound*days))
     model.range("F17").value = company2_exit_date
     
-    company3_exit_date = company1_inv_date + timedelta(days = np.random.triangular(hold_period_lower_bound*days,
+    company3_exit_date = company3_inv_date + timedelta(days = np.random.triangular(hold_period_lower_bound*days,
                                                         hold_period_mode*days,
                                                         hold_period_upper_bound*days))
     model.range("F18").value = company3_exit_date
     
-    company4_exit_date = company1_inv_date + timedelta(days = np.random.triangular(hold_period_lower_bound*days,
+    company4_exit_date = company3_inv_date + timedelta(days = np.random.triangular(hold_period_lower_bound*days,
                                                         hold_period_mode*days,
                                                         hold_period_upper_bound*days))
     model.range("F19").value = company4_exit_date
     
-    company5_exit_date = company1_inv_date + timedelta(days = np.random.triangular(hold_period_lower_bound*days,
+    company5_exit_date = company4_inv_date + timedelta(days = np.random.triangular(hold_period_lower_bound*days,
                                                         hold_period_mode*days,
                                                         hold_period_upper_bound*days))
     model.range("F20").value = company5_exit_date
