@@ -24,7 +24,7 @@ returns_sims = 100000
 inv_period_lower_bound = 0
 inv_period_mode = 2.0
 inv_period_upper_bound = 5
-inv_period_sims = 100_000
+inv_period_sims = 100000
 inv_period_bins = inv_period_upper_bound
 
 # plt.hist(np.random.triangular(inv_period_lower_bound,inv_period_mode,inv_period_upper_bound,inv_period_sims),
@@ -108,7 +108,7 @@ def dcf_simulation():
         row = COMPANIES_START_ROW + i 
         company = companies[i]
 
-        model.range(f"C{row}").value = -company.initial_investment
+        model.range(f"C{row}").value = -company.capital_in
         model.range(f"D{row}").value = company.capital_out
         model.range(f"E{row}").value = company.inv_date
         model.range(f"F{row}").value = company.exit_date
@@ -260,4 +260,4 @@ def dcf_simulation():
     portfolio_IRR = model.range("C29").value
     
     results.append((portfolio_MOIC,portfolio_IRR))
-#     return results
+    return results
