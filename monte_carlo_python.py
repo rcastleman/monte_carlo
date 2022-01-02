@@ -67,7 +67,7 @@ output_results = book.sheets("Results")
 
 class Company:
     def __init__(self):
-        self.initial_investment = None
+        self.capital_in = None
         self.capital_out = None 
         self.inv_date = None
         self.exit_date = None
@@ -94,13 +94,13 @@ def dcf_simulation():
     for company in companies:
         company.capital_in = avg_initial_investment  # all initial investments are currently the Fund Size divided by the number of companies 
         
-        company.capital_out = company_capital_in * np.random.lognormal(returns_mean,returns_STD #see parameters above
+        company.capital_out = company.capital_in * np.random.lognormal(returns_mean,returns_STD #see parameters above
         
         company.inv_date = inv_period_begin_date + timedelta(days = np.random.triangular(inv_period_lower_bound*days,
                                                          inv_period_mode*days,
                                                          inv_period_upper_bound*days)) #random offset from Investment Period Start Date using parameters above 
         
-        company.exit_date = company_inv_date + timedelta(days = np.random.triangular(hold_period_lower_bound*days,
+        company.exit_date = company.inv_date + timedelta(days = np.random.triangular(hold_period_lower_bound*days,
                                                         hold_period_mode*days,
                                                         hold_period_upper_bound*days)) #random offset from Company Investment Date using parameters above
 
