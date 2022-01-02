@@ -74,6 +74,7 @@ class Company:
 
 fund_size = 100
 num_companies = 10
+avg_initial_investment = fund_size / num_companies
 inv_period_begin_date = date(2022,1,1)
 days = 365
 results = []
@@ -114,8 +115,6 @@ def dcf_simulation():
 
 #     model.range("C2").value = fund_size
 #     model.range("C3").value = num_companies
-
-    avg_initial_investment = fund_size / num_companies
 
     #capital in
 #     model.range("C16").value = -avg_initial_investment
