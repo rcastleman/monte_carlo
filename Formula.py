@@ -7,3 +7,10 @@
 # see https://github.com/rcastleman/monte_carlo/blob/main/formula.png
 
 # tolerance = range between which, if answers vary, formula is "solved"
+
+xirr = 0.1 
+dates_in = []
+dates_out = []
+capital_in = []
+capital_out = []
+
