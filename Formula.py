@@ -4,5 +4,6 @@
 
 # sum of ... Payment / (1+XIRR)^((date[i]  - date [0])/365)
 
-# tolerance = range between which, if answers vary, formula is "solved"
+# see https://github.com/rcastleman/monte_carlo/blob/main/formula.png
 
+# tolerance = range between which, if answers vary, formula is "solved"
