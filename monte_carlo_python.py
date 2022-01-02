@@ -10,7 +10,7 @@ from datetime import date,timedelta
 # returns distribution parameters
 returns_mean = 1.0
 returns_STD = 1.0
-returns_sims = 100_000
+returns_sims = 100000
 
 plt.hist(np.random.lognormal(returns_mean,returns_STD,returns_sims),
         bins = 500,
@@ -70,7 +70,7 @@ plt.show()
 
 # Connect the Excel workbook
 
-book = xw.Book('portfolio_monte_carlo.xlsx')
+book = xw.Book('Portfolio_monte_carlo.xlsx')
 model = book.sheets("Model")
 results = book.sheets("Results")
 
