@@ -76,7 +76,7 @@ fund_size = 100
 num_companies = 10
 avg_initial_investment = fund_size / num_companies
 inv_period_begin_date = date(2022,1,1)
-days = 365
+days_in_year = 365
 results = []
 hold_period_mode = 4.5
 hold_period_lower_bound = 1
@@ -89,6 +89,7 @@ model.range("C3").value = num_companies #for convenience, for someone viewing th
 COMPANIES_START_ROW = 16
 
 def dcf_simulation():
+
     book.sheets('Results').clear()
 
     # Create all company objects
@@ -99,13 +100,13 @@ def dcf_simulation():
         
         company.capital_out = company.capital_in * np.random.lognormal(returns_mean,returns_STD #see parameters above
         
-        company.inv_date = inv_period_begin_date + timedelta(days = np.random.triangular(inv_period_lower_bound*days,
-                                                         inv_period_mode*days,
-                                                         inv_period_upper_bound*days)) #random offset from Investment Period Start Date using parameters above 
+        company.inv_date = inv_period_begin_date + timedelta(days = np.random.triangular(inv_period_lower_bound * days_in_year,
+        inv_period_mode * days_in_year,
+        inv_period_upper_bound * days_in_year)) #random offset from Investment Period Start Date using parameters above 
         
-        company.exit_date = company.inv_date + timedelta(days = np.random.triangular(hold_period_lower_bound*days,
-                                                        hold_period_mode*days,
-                                                        hold_period_upper_bound*days)) #random offset from Company Investment Date using parameters above
+        company.exit_date = company.inv_date + timedelta(days = np.random.triangular(hold_period_lower_bound * days_in_year,
+        hold_period_mode * days_in_year, 
+        hold_period_upper_bound * days_in_year)) #random offset from Company Investment Date using parameters above
 
     for i in range(num_companies):
         row = COMPANIES_START_ROW + i 
