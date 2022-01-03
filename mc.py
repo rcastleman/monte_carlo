@@ -98,7 +98,7 @@ def dcf_simulation():
     for company in companies:
         company.capital_in = avg_initial_investment  # all initial investments are currently the Fund Size divided by the number of companies 
         
-        company.capital_out = company.capital_in * np.random.lognormal(returns_mean,returns_STD #see parameters above
+        company.capital_out = company.capital_in * np.random.lognormal(returns_mean,returns_STD) #see parameters above
         
         company.inv_date = inv_period_begin_date + timedelta(days = np.random.triangular(inv_period_lower_bound * days_in_year,
         inv_period_mode * days_in_year,
