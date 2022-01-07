@@ -122,4 +122,6 @@ def dcf_simulation():
     portfolio_IRR = model.range("C29").value
     
     results.append((portfolio_MOIC,portfolio_IRR))
-    return results
+    print(results)
+
+dcf_simulation()
