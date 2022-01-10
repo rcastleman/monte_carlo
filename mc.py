@@ -10,7 +10,7 @@ from datetime import date,timedelta
 # Returns Distribution Parameters (lognormal distribution)
 returns_mean = 1.0
 returns_STD = 1.0
-returns_sims = 100000
+# returns_sims = 100000
 
 # plt.hist(np.random.lognormal(returns_mean,returns_STD,returns_sims),
 #         bins = 500,
@@ -124,4 +124,7 @@ def dcf_simulation():
     results.append((portfolio_MOIC,portfolio_IRR))
     print(results)
 
-dcf_simulation()
+num_sims = 10
+
+for i in range (num_sims):
+    dcf_simulation()
