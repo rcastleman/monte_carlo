@@ -134,7 +134,7 @@ def dcf_simulation():
     # results.append((portfolio_MOIC,portfolio_IRR))
     # print(results)
 
-for i in range (num_companies):
-    dcf_simulation()
+# for i in range (num_companies):
+dcf_simulation()
 print(xirr(dates,amounts))
-# print(dates,amounts)
+print(dates,amounts)
