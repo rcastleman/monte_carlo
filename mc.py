@@ -1,11 +1,13 @@
-import xlwings as xw
-from xlwings import constants
+# import xlwings as xw
+# from xlwings import constants
 import pandas as pd
 import random
 import numpy as np
 from numpy.random import uniform
 import matplotlib.pyplot as plt
 from datetime import date,timedelta
+from pyxirr import xirr
+
 
 # Returns Distribution Parameters (lognormal distribution)
 returns_mean = 1.0
@@ -58,9 +60,9 @@ hold_period_upper_bound = 10
 
 # Connect the Excel workbook
 
-book = xw.Book('Portfolio_monte_carlo.xlsx')
-model = book.sheets("Model")
-output_results = book.sheets("Results")
+# book = xw.Book('Portfolio_monte_carlo.xlsx')
+# model = book.sheets("Model")
+# output_results = book.sheets("Results")
 
 
 # SIMULATION
@@ -82,15 +84,18 @@ hold_period_mode = 4.5
 hold_period_lower_bound = 1
 hold_period_upper_bound = 10
 
-model.range("C2").value = fund_size  #for convenience, for someone viewing the Excel sheet
-model.range("C3").value = num_companies #for convenience, for someone viewing the Excel sheet
+# model.range("C2").value = fund_size  #for convenience, for someone viewing the Excel sheet
+# model.range("C3").value = num_companies #for convenience, for someone viewing the Excel sheet
 
 # Row of the Excel sheet where the first company's data goes
-COMPANIES_START_ROW = 16
+# COMPANIES_START_ROW = 16
+
+dates = []
+amounts = []
 
 def dcf_simulation():
 
-    book.sheets('Results').clear()
+    # book.sheets('Results').clear()
 
     # Create all company objects
     companies = [Company() for _ in range(num_companies)]
@@ -108,23 +113,28 @@ def dcf_simulation():
         hold_period_mode * days_in_year, 
         hold_period_upper_bound * days_in_year)) #random offset from Company Investment Date using parameters above
 
-    for i in range(num_companies):
-        row = COMPANIES_START_ROW + i 
-        company = companies[i]
+        dates.append(company.inv_date)
+        dates.append(company.exit_date)
+        amounts.append(-company.capital_in)
+        amounts.append(company.capital_out)
 
-        model.range(f"C{row}").value = -company.capital_in
-        model.range(f"D{row}").value = company.capital_out
-        model.range(f"E{row}").value = company.inv_date
-        model.range(f"F{row}").value = company.exit_date
+    # for i in range(num_companies):
+    #     row = COMPANIES_START_ROW + i 
+    #     company = companies[i]
 
-    #portfolio output
-    portfolio_MOIC = model.range("C28").value
-    portfolio_IRR = model.range("C29").value
+    #     model.range(f"C{row}").value = -company.capital_in
+    #     model.range(f"D{row}").value = company.capital_out
+    #     model.range(f"E{row}").value = company.inv_date
+    #     model.range(f"F{row}").value = company.exit_date
+
+    # portfolio output
+    # portfolio_MOIC = model.range("C28").value
+    # portfolio_IRR = model.range("C29").value
     
-    results.append((portfolio_MOIC,portfolio_IRR))
-    print(results)
+    # results.append((portfolio_MOIC,portfolio_IRR))
+    # print(results)
 
-num_sims = 10
-
-for i in range (num_sims):
+for i in range (num_companies):
     dcf_simulation()
+print(xirr(dates,amounts))
+# print(dates,amounts)
