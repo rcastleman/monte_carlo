@@ -83,6 +83,8 @@ def portfolio():
 
     # Create all company objects
     companies = [Company() for _ in range(num_companies)]
+    dates.clear()
+    amounts.clear()
 
     for company in companies:
         company.capital_in = avg_initial_investment  # all initial investments are currently the Fund Size divided by the number of companies 
