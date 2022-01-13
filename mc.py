@@ -113,6 +113,5 @@ results = []
 for i in range(num_sims):
     portfolio()
     results.append(xirr(dates,amounts))
-    # i += 1
 
 print(results)
