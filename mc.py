@@ -109,6 +109,7 @@ def portfolio():
 
 num_sims = 5
 results = []
+df = pd.DataFrame()
 
 for i in range(num_sims):
     portfolio()
