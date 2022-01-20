@@ -109,10 +109,12 @@ def portfolio():
 
 num_sims = 5
 results = []
-df = pd.DataFrame()
 
 for i in range(num_sims):
     portfolio()
+    # results.append(("simulation #{}".format(i), xirr(dates,amounts))
     results.append(xirr(dates,amounts))
+
+# df = DataFrame(results,columns = ["Simulation #","Fund Size","# Companies","MOIC","IRR"])
 
 print(results)
