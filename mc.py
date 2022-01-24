@@ -65,6 +65,8 @@ class Company:
         self.capital_out = None 
         self.inv_date = None
         self.exit_date = None
+        self.hold_period = None
+        self.MOIC = None
 
 fund_size = 100
 num_companies = 10
@@ -104,17 +106,24 @@ def portfolio():
         amounts.append(-company.capital_in)
         amounts.append(company.capital_out)
 
+        company.hold_period = company.exit_date - company.inv_date
+        company.MOIC = company.capital_out / company.capital_in
+
+        print(xirr(dates,amounts))
+
+portfolio()
 
 #SIMULATION N PORTFOLIOS AND RETURN RANGE OF OUTCOMES 
 
-num_sims = 5
-results = []
+# num_sims = 4
+# results = []
 
-for i in range(num_sims):
-    portfolio()
-    # results.append(("simulation #{}".format(i), xirr(dates,amounts))
-    results.append(xirr(dates,amounts))
+# for i in range(1,num_sims):
+#     portfolio()
+#     results.append(("simulation #{}".format(i),
+#     fund_size,num_companies,
+#     company.hold_period,
+#     company.MOIC,
+#     xirr(dates,amounts)))
 
-# df = DataFrame(results,columns = ["Simulation #","Fund Size","# Companies","MOIC","IRR"])
-
-print(results)
+# df = DataFrame(results,columns = ["Simulation #","Fund Size","# Companies","Holding Period","MOIC","IRR"])
