@@ -68,9 +68,9 @@ class Company:
         self.hold_period = None
         self.MOIC = None
 
-fund_size = 100
-num_companies = 10
-avg_initial_investment = fund_size / num_companies
+# fund_size = 100
+# num_companies = 5
+# avg_initial_investment = fund_size / num_companies
 inv_period_begin_date = date(2022,1,1)
 days_in_year = 365
 results = []
@@ -83,11 +83,16 @@ amounts = []
 
 def portfolio():
 
+    fund_size = int(input ("Enter fund size: "))
+    num_companies = int(input("Enter # of companies in fund: "))
+    avg_initial_investment = fund_size / num_companies
+
     # Create all company objects
     companies = [Company() for _ in range(num_companies)]
     dates.clear()
     amounts.clear()
 
+    
     for company in companies:
         company.capital_in = avg_initial_investment  # all initial investments are currently the Fund Size divided by the number of companies 
         
@@ -109,9 +114,11 @@ def portfolio():
         company.hold_period = company.exit_date - company.inv_date
         company.MOIC = company.capital_out / company.capital_in
 
-        print(xirr(dates,amounts))
-
+        
 portfolio()
+print(xirr(dates,amounts))
+# print(dates)
+# print(amounts)
 
 #SIMULATION N PORTFOLIOS AND RETURN RANGE OF OUTCOMES 
 
