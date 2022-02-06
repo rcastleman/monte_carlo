@@ -83,8 +83,6 @@ amounts = []
 
 def portfolio():
 
-    fund_size = int(input ("Enter fund size: "))
-    num_companies = int(input("Enter # of companies in fund: "))
     avg_initial_investment = fund_size / num_companies
 
     # Create all company objects
@@ -112,25 +110,24 @@ def portfolio():
         amounts.append(company.capital_out)
 
         company.hold_period = company.exit_date - company.inv_date
-        company.MOIC = company.capital_out / company.capital_in
+        # company.MOIC = company.capital_out / company.capital_in
 
+        portfolio_IRR = xirr(dates,amounts)
+        return portfolio_IRR
         
-portfolio()
-print(xirr(dates,amounts))
-# print(dates)
-# print(amounts)
+# portfolio()
+# print(xirr(dates,amounts))
 
 #SIMULATION N PORTFOLIOS AND RETURN RANGE OF OUTCOMES 
 
-# num_sims = 4
-# results = []
+results = []
+fund_size = int(input ("Enter fund size: "))
+num_companies = int(input("Enter # of companies in fund: "))
+num_sims = int(input("Enter # of simulations: "))
 
-# for i in range(1,num_sims):
-#     portfolio()
-#     results.append(("simulation #{}".format(i),
-#     fund_size,num_companies,
-#     company.hold_period,
-#     company.MOIC,
-#     xirr(dates,amounts)))
+for i in range(num_sims):
+    results.append(portfolio())
+
+print(results)
 
 # df = DataFrame(results,columns = ["Simulation #","Fund Size","# Companies","Holding Period","MOIC","IRR"])
