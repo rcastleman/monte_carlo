@@ -112,8 +112,8 @@ def portfolio():
         company.hold_period = company.exit_date - company.inv_date
         # company.MOIC = company.capital_out / company.capital_in
 
-        portfolio_IRR = xirr(dates,amounts)
-        return portfolio_IRR
+    portfolio_IRR = xirr(dates,amounts)
+    return portfolio_IRR
         
 # portfolio()
 # print(xirr(dates,amounts))
