@@ -128,6 +128,7 @@ num_sims = int(input("Enter # of simulations: "))
 for i in range(num_sims):
     results.append(portfolio())
 
-print(results)
+# print(results)
 
-# df = DataFrame(results,columns = ["Simulation #","Fund Size","# Companies","Holding Period","MOIC","IRR"])
+output_data = pd.DataFrame(results,columns = ["Simulation #","Fund Size","# Companies","Holding Period","MOIC","IRR"])
+print(output_data)
