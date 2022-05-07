@@ -1,3 +1,4 @@
+from turtle import color
 import xlwings as xw
 import pandas as pd
 import random
@@ -23,8 +24,8 @@ results.clear_contents()
 
 #define input distribution
 def input():
-    input_mean = 15
-    input_std = 5
+    input_mean = 10 
+    input_std = 1.2
     return random.normalvariate(input_mean,input_std)
 
 #define the input and output cells
@@ -34,9 +35,9 @@ def input():
 # output = model.range('A2').value
 
 #simulation loop
+num_sims = 100
 input_list = []
 output_list = []
-num_sims = 10
 for i in range(num_sims):
     model.range('A1').value = input()
     output = model.range('A2').value
@@ -53,6 +54,33 @@ results.range('B1').value = 'Outputs'
 results.range('A2').value = input_list_transposed
 results.range('B2').value = output_list_tranposed
 
+#export results to dataframes
+df = pd.DataFrame(output_list)
+df.columns = ['Outputs']
+print(df.head())
+
+#create plot(s)
+sim_fig = plt.figure()
+plot = plt.hist(df,
+        density=True,
+        bins=10)
+plt.xlabel('Outputs')
+plt.ylabel('Density')
+plt.title('Distribution of Outcomes')
+plt.vlines(df.mean(),
+    ymin = 0,
+    ymax = 0.05,
+    color='red')
+
+#export plot to Results worksheet
+rng = results.range('D2')
+results.pictures.add(sim_fig,
+    name = 'Simulation',
+    update = True,
+    top = rng.top,
+    left = rng.left)
+
+# print(plot)
 # print(output_list)
 # print(book.sheets)
 # print(f'The square of {input:.1f} is {output:.1f}')
