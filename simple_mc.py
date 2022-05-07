@@ -1,17 +1,17 @@
-from turtle import color
 from matplotlib import lines
 import xlwings as xw
 import pandas as pd
 import random
 import numpy as np
 from numpy.random import uniform
+from turtle import color
 import matplotlib.pyplot as plt
 from datetime import date,timedelta
 from pyxirr import xirr
 
 #guided by https://www.youtube.com/watch?v=Tv701NoFKw8
 
-#Important note: the calculations are done on the Excel spreadsheet, but the collection of the inputs and outputs is done in the program using dataframes.  For large #s of simluations, this will be slow and the calculation should be moved into the program -- though the summary stats and plots can still be written out to a spreadsheet.
+"""Important note: the calculations are done on the Excel spreadsheet, but the collection of inputs and outputs is done by the program using dataframes.  For certain calculations involing series of periods (e.g. a financial model) this may be the most practical way to do the calculations.  However, for large #s of simluations, this will be slow so in some cases, it may be best to move the calculations to the program, while still exporting  summary stats and plots to the worksheet."""
 
 # connect workbook to program
 book = xw.Book('simple_mc.xlsx')  
