@@ -1,4 +1,5 @@
 from turtle import color
+from matplotlib import lines
 import xlwings as xw
 import pandas as pd
 import random
@@ -69,16 +70,42 @@ plt.ylabel('Density')
 plt.title('Distribution of Outcomes')
 plt.vlines(df.mean(),
     ymin = 0,
-    ymax = 0.05,
+    ymax = 0.025,
     color='red')
 
-#export plot to Results worksheet
-rng = results.range('D2')
+#EXPORT FIGURES TO WORKSHEET
+
+#histogram of results
+rng = results.range('G2')
 results.pictures.add(sim_fig,
     name = 'Simulation',
     update = True,
     top = rng.top,
     left = rng.left)
+
+#Data series summary stats
+description = df.describe()
+results.range('D2').value = description
+
+#Cumulative Distribution 
+fig_cdf = plt.figure()
+x = np.sort(df['Outputs'])
+y = np.arange(1,len(x)+1)/len(x)
+plt.plot(x,y,
+    marker = '.',
+    linestyle = None)
+plt.xlabel = ('Outputs')
+plt.title('Cumulative Distribution Function')
+plt.plot(x,y)
+plt.show
+
+rng = results.range('G24')
+results.pictures.add(fig_cdf,
+    name = 'Cumul Dist Function',
+    update = True,
+    top = rng.top,
+    left = rng.left)
+
 
 # print(plot)
 # print(output_list)
