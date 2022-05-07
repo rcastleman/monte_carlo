@@ -9,41 +9,34 @@ import matplotlib.pyplot as plt
 from datetime import date,timedelta
 from pyxirr import xirr
 
+#guided by https://www.youtube.com/watch?v=Tv701NoFKw8
+
+#Important note: the calculations are done on the Excel spreadsheet, but the collection of the inputs and outputs is done in the program using dataframes.  For large #s of simluations, this will be slow and the calculation should be moved into the program -- though the summary stats and plots can still be written out to a spreadsheet.
+
 # connect workbook to program
 book = xw.Book('simple_mc.xlsx')  
 
-#define which sheet is the Model
+#define which sheet is the Model and which is the Results
 model = book.sheets('model')
 results = book.sheets('results')
 results.clear_contents()
 
-#add a sheet to collect results
-# book.sheets.add('results')
 
-#write a value to the input cell in the Model
-# model.range('A1').value = 11
-
-#define input distribution
+#define the input distribution function (just normal in this case)
 def input():
     input_mean = 10 
     input_std = 1.2
     return random.normalvariate(input_mean,input_std)
 
-#define the input and output cells
-# input = model.range('A1').value
-# model.range('A1').value = input_random
-# input = model.range('A1').value
-# output = model.range('A2').value
-
-#simulation loop
-num_sims = 100
+#simulation 
+num_sims = 1000
 input_list = []
 output_list = []
 for i in range(num_sims):
-    model.range('A1').value = input()
-    output = model.range('A2').value
-    input_list.append(model.range('A1').value)
-    output_list.append(output)
+    model.range('A1').value = input() #writes the input value to the appropriate cell so the worksheet can use it 
+    output = model.range('A2').value #reads the output value from the worksheet based on the input above
+    input_list.append(model.range('A1').value) #adds this particular input value to the list of inputs
+    output_list.append(output) #adds this particular output to the list of outputs
 
 #transpose inputs & outputs to be exported to worksheet
 output_list_tranposed = [[x] for x in output_list]
@@ -105,7 +98,6 @@ results.pictures.add(fig_cdf,
     update = True,
     top = rng.top,
     left = rng.left)
-
 
 # print(plot)
 # print(output_list)
